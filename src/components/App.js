@@ -1,31 +1,33 @@
-import React, { useState, useMemo } from "react";
-import UseMemo from "./UseMemo";
-import ReactMemo from "./ReactMemo";
+import React, { useState, useMemo } from 'react';
+import UseMemo from './UseMemo';
+import ReactMemo from './ReactMemo';
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [skill, setSkill] = useState("");
+  const [skill, setSkill] = useState('');
+
 
   const handleAddTodo = () => {
-    setTasks([...tasks, "New todo"]);
+    setTasks([...tasks, `New todo ${tasks.length}`]);
   };
-
 
   const handleIncrement = () => {
     setCounter(counter + 1);
   };
 
+  
   const handleSkillChange = (e) => {
     setSkill(e.target.value);
   };
 
+
   const handleAddSkill = () => {
     if (skill.length > 5) {
       setTasks([...tasks, skill]);
-      setSkill("");
+      setSkill('');
     } else {
-      alert("Skill must be more than 5 characters");
+      alert('Skill must be more than 5 characters');
     }
   };
 
@@ -46,9 +48,14 @@ function App() {
         onChange={handleSkillChange}
         placeholder="Enter a skill"
       />
-      <button id="add-skill-btn" onClick={handleAddSkill}>
+      <button id="skill-btn" onClick={handleAddSkill}>
         Add Skill
       </button>
+      <ul>
+        {tasks.map((task, index) => (
+          <li key={index} id={`todo-${index}`}>{task}</li>
+        ))}
+      </ul>
       <UseMemo tasks={tasks} />
       <ReactMemo tasks={tasks} />
     </div>
