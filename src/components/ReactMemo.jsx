@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReactMemo = React.memo(({ tasks }) => {
+const ReactMemo = React.memo(({ tasks = []}) => {
   console.log('Rendering ReactMemo component...');
   return (
     <div>

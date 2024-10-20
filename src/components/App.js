@@ -1,52 +1,56 @@
 import React, { useState, useMemo } from "react";
-import UseMemoComponent from "./UseMemo";
-import ReactMemoComponent from "./ReactMemo";
+import UseMemo from "./UseMemo";
+import ReactMemo from "./ReactMemo";
 
 function App() {
   const [tasks, setTasks] = useState([]);
   const [counter, setCounter] = useState(0);
-  const [customTask, setCustomTask] = useState("");
+  const [skill, setSkill] = useState("");
 
-  const addNewTask = () => {
+  const handleAddTodo = () => {
     setTasks([...tasks, "New todo"]);
   };
 
-  const incrementCounter = () => {
+
+  const handleIncrement = () => {
     setCounter(counter + 1);
   };
 
-  const handleCustomTaskChange = (e) => {
-    setCustomTask(e.target.value);
+  const handleSkillChange = (e) => {
+    setSkill(e.target.value);
   };
 
-  const addCustomTask = () => {
-    if (customTask.length > 5) {
-      setTasks([...tasks, customTask]);
-      setCustomTask("");
+  const handleAddSkill = () => {
+    if (skill.length > 5) {
+      setTasks([...tasks, skill]);
+      setSkill("");
     } else {
-      alert("Task must be more than 5 characters long.");
+      alert("Skill must be more than 5 characters");
     }
   };
 
-  const totalTasks = useMemo(() => tasks.length, [tasks]);
-
   return (
-    <div className="App">
-      <h1>Todo List</h1>
-      <button onClick={addNewTask}>Add todo</button>
-      <button onClick={incrementCounter}>Increment Counter</button>
+    <div id="main">
+      <h1>Todo and Skill Manager</h1>
+      <button id="add-todo-btn" onClick={handleAddTodo}>
+        Add Todo
+      </button>
+      <button id="incr-cnt" onClick={handleIncrement}>
+        Increment
+      </button>
       <p>Counter: {counter}</p>
       <input
+        id="skill-input"
         type="text"
-        value={customTask}
-        onChange={handleCustomTaskChange}
-        placeholder="Enter custom task"
+        value={skill}
+        onChange={handleSkillChange}
+        placeholder="Enter a skill"
       />
-      <button onClick={addCustomTask}>Submit</button>
-      <p>Total tasks: {totalTasks}</p>
-
-      <UseMemoComponent tasks={tasks} />
-      <ReactMemoComponent tasks={tasks} />
+      <button id="add-skill-btn" onClick={handleAddSkill}>
+        Add Skill
+      </button>
+      <UseMemo tasks={tasks} />
+      <ReactMemo tasks={tasks} />
     </div>
   );
 }

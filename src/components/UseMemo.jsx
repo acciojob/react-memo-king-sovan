@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 
-const UseMemo = ({ tasks }) => {
+const UseMemo = ({ tasks = [] }) => {
     const longRunningTask = useMemo(() => {
         console.log('Calculating long-running task...')
         return tasks.map(task => task.toUpperCase()).join(', ');
